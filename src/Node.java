@@ -7,8 +7,8 @@ class Node<T extends Comparable<T>> extends AbstractNode<T> {
     public boolean insert (T key) {
 
         int direction = key.compareTo(this.key);
-    // use direction to choose if left or right, zero means equality
-        System.out.println("Direction: " + direction);
+        // use direction to choose if left or right, zero means equality
+        //System.out.println("Direction: " + direction);
         if (direction == 1) { // If right
             if(this.right == null) {
                 this.right = new Node<T>(key);

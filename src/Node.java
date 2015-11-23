@@ -7,30 +7,30 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
   public boolean insert (T key){
 
     int direction = key.compareTo(this.key);
-    Boolean b = false;
     // use direction to choose if left or right, zero means equality
     System.out.println("Direction: " + direction);
     if(direction == 1){ // If right
         if(this.right == null){
-            this.right = new Node(key);
-            b =  true;
+            this.right = new Node<T>(key);
+            return true;
         } else {
-            b = this.right.insert(key);
+            return this.right.insert(key);
         }
     } else if (direction == -1){ //If left
         if(this.left == null){
-            this.left = new Node(key);
-            b =  true;
+            this.left = new Node<T>(key);
+            return true;
         } else {
-            b = this.left.insert(key);
+            return this.left.insert(key);
         }
     } else if (direction == 0){ //If equal
         System.out.println("ERROR: Key already exists. Keys are unique!");
+        return false;
     } else {
         System.out.println("ERROR: compareTo method returned gibberish.");
+        return false;
     }
     // should be more sophisticated than xkcd random dice roll https://xkcd.com/221/
-    return b;
   }
 
   public boolean isIn (T key){
@@ -62,7 +62,7 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
       }
   }
 
-  public void postorder(){//L-R-W
+  public void postorder(){ //L-R-W
       if(this.left != null){
           this.left.postorder();
       }
@@ -75,29 +75,24 @@ class Node<T extends Comparable<T>> extends AbstractNode<T>{
 
   public int maxDepth(){
 
-	  int md = 0;
-	  int l = 0;
-	  int r = 0;
-	  
-	  if(this.left != null){
-		  l=this.left.maxDepth();
-	  }
-	  if (this.right != null){
-		  r=this.right.maxDepth();
-	  }
-	  
-	  if(l >= r){
-		  md = l;
-	  } else {
-		  md = r;
-	  }
-	  
+      int md = 0;
+      int l = 0;
+      int r = 0;
+      
+      if(this.left != null){
+          l=this.left.maxDepth();
+      }
+      if (this.right != null){
+          r=this.right.maxDepth();
+      }
+      
+      if(l >= r){
+          md = l;
+      } else {
+          md = r;
+      }
+      
     // Should be a bit more sophisticated
-<<<<<<< HEAD
     return ++md;
-  }		
-=======
-    return 0;
   }
->>>>>>> origin/master
 }

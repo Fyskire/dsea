@@ -50,6 +50,8 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 		T.inorder();
 		System.out.println("");
 		T.postorder();
+		System.out.println("");
+		System.out.println("max depth: " +T.maxDepth());
 
 }
 }

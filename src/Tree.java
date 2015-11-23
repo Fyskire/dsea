@@ -37,31 +37,48 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 
     public static void main(String args[]) {
         Random rnd = new Random();
+
         for (int k = 2; k <= 6; k++) {
             System.out.print("n = 10^"+k+" | 10 Runs: [          ]\b\b\b\b\b\b\b\b\b\b\b");
+
             int n = (int) Math.pow(10,k);
             double avgDepth = 0;
+
+            // 10 Runs
             for (int i = 0; i < 10; i++) {
+                // generate List {1,...,n}
                 ArrayList<Integer> numbers = new ArrayList<Integer>(n);
                 for (int j = 1; j <= n; j++)
                     numbers.add(j);
-                int index = rnd.nextInt(n);
-                Tree<Integer> tree1 = new Tree<Integer>(numbers.get(index));
+
+                // Since we cannot create an empty Tree, the insertion of the firt number is singled out.
+                int index = rnd.nextInt(n); // choose a random element from the number list
+                Tree<Integer> tree1 = new Tree<Integer>(numbers.get(index)); // insert chosen number into tree
+                // Since the deletion of a single element from an ArrayList runs in linear time,
+                // we move the number to the end of the list instead and effectively decrease both the range of our next random integer,
+                // and the last index of the number list.
+                // This operation should run in constant time per element.
+
+                // swap randomly chosen element with last element of the list
                 Integer swp = numbers.get(index);
                 numbers.set(index, numbers.get(n-1));
                 numbers.set(n-1, swp);
+
+                // insert the other n-1 elements similarly
                 for (int j = 1; j < n; j++) {
-                    index = rnd.nextInt(n-j);
+                    index = rnd.nextInt(n-j); // range decreases by 1 after each insertion
                     tree1.insert(numbers.get(index));
                     swp = numbers.get(index);
-                    numbers.set(index, numbers.get(n-j-1));
+                    numbers.set(index, numbers.get(n-j-1)); // index of last element of the list decreases by 1 after each insertion
                     numbers.set(n-j-1, swp);
                 }
                 avgDepth += (double) tree1.maxDepth();
+
                 System.out.print("#");
             }
-            System.out.print("] | ");
             avgDepth = avgDepth/10;
+
+            System.out.print("] | ");
             System.out.println("avgDepth = "+avgDepth);
         }
     }

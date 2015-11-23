@@ -1,6 +1,16 @@
 import java.util.*;
 // Wrapper class, there is no need for customization
 class Tree<T extends Comparable<T>> extends AbstractTree<T> {
+	
+	/**
+	 * e)
+	 * - für sortierte DataSets, indem jeder Key nur einmal vorkommen darf, selbst wenn in der Ursprungsmenge ein Item mehrfach vorkommt 
+	 * (siehe Warenkorbanalyse, Apriori, FPGrowth)(wie bei TreeSets)
+	 * - Datenabanken, auch mit mehrfach vorkommenden Schlüsseln. Binärbäume bieten sich zur Organisation der Daten an, da sie diverse 
+	 * Funktionen erlauben, wie zB Ausgabe der Daten in Reihenfolge der Sortierung, 
+	 * entgegen der Sortierung und potentiell logarithmische Suchfunktion.
+	 * 
+	 */
 
     public Tree(T key) {
         root = new Node<T>(key);
@@ -51,7 +61,7 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
                 for (int j = 1; j <= n; j++)
                     numbers.add(j);
 
-                // Since we cannot create an empty Tree, the insertion of the firt number is singled out.
+                // Since we cannot create an empty Tree, the insertion of the first number is singled out.
                 int index = rnd.nextInt(n); // choose a random element from the number list
                 Tree<Integer> tree1 = new Tree<Integer>(numbers.get(index)); // insert chosen number into tree
                 // Since the deletion of a single element from an ArrayList runs in linear time,

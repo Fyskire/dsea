@@ -66,6 +66,6 @@ class Node<T extends Comparable<T>> extends AbstractNode<T> {
         int l = (left!=null?left.maxDepth():0);
         int r = (right!=null?right.maxDepth():0);
         return (l>r?l:r)+1;
-        // FUCKING 1337
+        // FOCKIN 1337 M8
     }
 }

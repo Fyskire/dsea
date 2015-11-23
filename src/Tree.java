@@ -38,7 +38,7 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
     public static void main(String args[]) {
         Random rnd = new Random();
         for (int k = 2; k <= 6; k++) {
-            System.out.print("n = 10^"+k+" | 10 Runs: [__________]\b\b\b\b\b\b\b\b\b\b\b");
+            System.out.print("n = 10^"+k+" | 10 Runs: [          ]\b\b\b\b\b\b\b\b\b\b\b");
             int n = (int) Math.pow(10,k);
             double avgDepth = 0;
             for (int i = 0; i < 10; i++) {
@@ -58,7 +58,7 @@ class Tree<T extends Comparable<T>> extends AbstractTree<T> {
                     numbers.set(n-j-1, swp);
                 }
                 avgDepth += (double) tree1.maxDepth();
-                System.out.print("X");
+                System.out.print("#");
             }
             System.out.print("] | ");
             avgDepth = avgDepth/10;

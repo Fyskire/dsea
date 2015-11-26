@@ -1,17 +1,18 @@
+/**
+*  Nr.1 e)
+*  Zwei mögliche Szenarios wären:
+* 1. für sortierte DataSets, indem jeder Key nur einmal vorkommen darf, selbst wenn in der Ursprungsmenge ein Item mehrfach vorkommt 
+* (siehe Warenkorbanalyse, Apriori, FPGrowth)(wie bei TreeSets).
+* 2. Datenabanken, auch mit mehrfach vorkommenden Schlüsseln. Binärbäume bieten sich zur Organisation der Daten an, da sie diverse 
+* Funktionen erlauben, wie zB Ausgabe der Daten in Reihenfolge der Sortierung, 
+* entgegen der Sortierung und potentiell logarithmische Suchfunktion.
+* 
+*/
+
 import java.util.*;
 // Wrapper class, there is no need for customization
 class Tree<T extends Comparable<T>> extends AbstractTree<T> {
 	
-	/**
-	 * e)
-	 * - für sortierte DataSets, indem jeder Key nur einmal vorkommen darf, selbst wenn in der Ursprungsmenge ein Item mehrfach vorkommt 
-	 * (siehe Warenkorbanalyse, Apriori, FPGrowth)(wie bei TreeSets)
-	 * - Datenabanken, auch mit mehrfach vorkommenden Schlüsseln. Binärbäume bieten sich zur Organisation der Daten an, da sie diverse 
-	 * Funktionen erlauben, wie zB Ausgabe der Daten in Reihenfolge der Sortierung, 
-	 * entgegen der Sortierung und potentiell logarithmische Suchfunktion.
-	 * 
-	 */
-
     public Tree(T key) {
         root = new Node<T>(key);
     }

@@ -1,13 +1,22 @@
 /*
-*  Nr.1 e)
-*  Zwei mögliche Szenarios wären:
-* 1. für sortierte DataSets, indem jeder Key nur einmal vorkommen darf, selbst wenn in der Ursprungsmenge ein Item mehrfach vorkommt
-* (siehe Warenkorbanalyse, Apriori, FPGrowth)(wie bei TreeSets).
-* 2. Datenbanken, auch mit mehrfach vorkommenden Schlüsseln. Binärbäume bieten sich zur Organisation der Daten an, da sie diverse
-* Funktionen erlauben, wie zB Ausgabe der Daten in Reihenfolge der Sortierung,
-* entgegen der Sortierung und potentiell logarithmische Suchfunktion.
-*
-*/
+ * Nr.1 c)  "Welche Eingabe würde den längsten Pfad von der Wurzel zu den Blättern maximieren?"
+ *          Eine Eingabe, die bereits komplett auf- oder absteigend sortiert ist. 
+ *          Dann hätte jeder Knoten genau einen Kind-Knoten und die maximale Tiefe wäre exakt gleich der Anzahl der Knoten. 
+ *          Der Baum hätte dann im Prinzip die Form einer verketteten Liste.
+ *
+ *      d)  "...stellen Sie eine Vermutung über das asymptotische Verhalten der Tiefe an."
+ *          Die durchschnittliche Maximale Tiefe scheint sich für eine Verzehnfachung der Eingabegröße etwa um 10 zu erhöhen.
+ *          Näherungsweise entspricht die Tiefe (log₁₀(n)-1)*10, was Element von O(log(n)) ist. 
+ *          Dies stimmt auch mit dem in der VL ausgerechneten Erwartungswert für die maximale Tiefe bei zufälliger Eingabe überein.
+ *      e)
+ *          Zwei mögliche Szenarios wären:
+ *          1. für sortierte DataSets, indem jeder Key nur einmal vorkommen darf, selbst wenn in der Ursprungsmenge ein Item mehrfach vorkommt
+ *          (siehe Warenkorbanalyse, Apriori, FPGrowth)(wie bei TreeSets).
+ *          2. Datenbanken, auch mit mehrfach vorkommenden Schlüsseln. Binärbäume bieten sich zur Organisation der Daten an, da sie diverse
+ *          Funktionen erlauben, wie zB Ausgabe der Daten in Reihenfolge der Sortierung,
+ *          entgegen der Sortierung und potentiell logarithmische Suchfunktion.
+ *
+ */
 
 import java.util.*;
 // Wrapper class, there is no need for customization

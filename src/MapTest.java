@@ -160,11 +160,11 @@ public class MapTest {
             H.put(p,i++);
         }
         System.out.println(i);
-        ArrayList<Point> outList = new ArrayList<Point>(i);
+        Point[] outArray = new Point[20];
         for (Map.Entry<Point,Integer> e: H.entrySet()) {
-            outList.add(e.getValue(),e.getKey());
+            outArray[e.getValue()]=e.getKey();
         }
-        for (Point e: outList) {
+        for (Point e: outArray) {
             out.println(""+e.x+" "+e.y);
         }
         /*

@@ -3,11 +3,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.Scanner;
+import java.io.File;
 
 class Point implements Comparable<Point> {
   public int x,y;
 
-  Point(int a,int b) { 
+  Point(int a,int b) {
     x = a;
     y = b;
   }
@@ -29,7 +31,7 @@ class Point implements Comparable<Point> {
   public boolean equals(Object obj) {
     Point p = (Point) obj;
     if (x == p.x && y == p.y) return true;
-    return false;     
+    return false;
   }
 
   @Override
@@ -45,38 +47,41 @@ class Point implements Comparable<Point> {
 public class MapTest {
   public static void main(String[] args) {
 
-    List<Point> P = new LinkedList<Point>();
-    P.add(new Point(1,2));
-    P.add(new Point(0,0));
-    P.add(new Point(1,2));
+    try (Scanner scan = new Scanner(new File("edges.txt"))) {
 
-    // Anlegen der HashMap, welche einen 2D Punkt auf eine Ganzzahl abbildet
-    HashMap<Point,Integer> H = new HashMap<Point,Integer>();
+        // Anlegen der HashMap, welche einen 2D Punkt auf eine Ganzzahl abbildet
+        HashMap<Point,Integer> H = new HashMap<Point,Integer>();
 
-    // Fügt den Punkt p mit einem Index der HashMap zu, falls dieser noch
-    // nicht enthalten ist.
-    int i = 0;
-    for(Point p: P) 
-      if (!H.containsKey(p))
-        H.put(p,i++);
+        // Fügt den Punkt p mit einem Index der HashMap zu, falls dieser noch
+        // nicht enthalten ist.
+        int i = 0;
+        while (scan.hasNext()) {
+            Point p = new Point(scan.nextInt(), scan.nextInt());
+          if (!H.containsKey(p))
+            H.put(p,i++);
+        }
+        System.out.println(i);
+        /*
+        // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
+        for(Map.Entry<Point,Integer> e: H.entrySet())
+          System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
 
-    // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
-    for(Map.Entry<Point,Integer> e: H.entrySet())
-      System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
+        // Selbes für die TreeMap
+        TreeMap<Point,Integer> T = new TreeMap<Point,Integer>();
 
-    // Selbes für die TreeMap
-    TreeMap<Point,Integer> T = new TreeMap<Point,Integer>();
+        // Fügt den Punkt p mit einem Index der TreeMap zu, falls dieser noch
+        // nicht enthalten ist.
+        i = 0;
+        for(Point p: P)
+          if (!T.containsKey(p))
+            T.put(p,i++);
 
-    // Fügt den Punkt p mit einem Index der TreeMap zu, falls dieser noch
-    // nicht enthalten ist.
-    i = 0;
-    for(Point p: P) 
-      if (!T.containsKey(p))
-        T.put(p,i++);
-
-    // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
-    for(Map.Entry<Point,Integer> e: T.entrySet())
-      System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
-
+        // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
+        for(Map.Entry<Point,Integer> e: T.entrySet())
+          System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
+        */
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
   }
 }

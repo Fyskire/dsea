@@ -1,10 +1,5 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.Scanner;
-import java.io.File;
+import java.util.*;
+import java.io.*;
 
 class Point implements Comparable<Point> {
   public int x,y;
@@ -47,14 +42,15 @@ class Point implements Comparable<Point> {
 public class MapTest {
   public static void main(String[] args) {
 
-    try (Scanner scan = new Scanner(new File("edges.txt"))) {
+    try (Scanner scan = new Scanner(new File("edges.txt"));
+         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("output.txt")))) {
 
         // Anlegen der HashMap, welche einen 2D Punkt auf eine Ganzzahl abbildet
         HashMap<Point,Integer> H = new HashMap<Point,Integer>();
 
         // Fügt den Punkt p mit einem Index der HashMap zu, falls dieser noch
         // nicht enthalten ist.
-        /* 
+        /*
             491 999 806 546
             45 76 491 999
             403 442 806 546
@@ -164,10 +160,13 @@ public class MapTest {
             H.put(p,i++);
         }
         System.out.println(i);
-        
-        // Gibt die (Key, Value) Paare aus, die oben hinzugefügt wurden
-        for(Map.Entry<Point,Integer> e: H.entrySet())
-          System.out.println(e.getKey().x+" "+e.getKey().y+" "+e.getValue());
+        ArrayList<Point> outList = new ArrayList<Point>(i);
+        for (Map.Entry<Point,Integer> e: H.entrySet()) {
+            outList.add(e.getValue(),e.getKey());
+        }
+        for (Point e: outList) {
+            out.println(""+e.x+" "+e.y);
+        }
         /*
 
         // Selbes für die TreeMap

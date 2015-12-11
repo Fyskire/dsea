@@ -21,7 +21,7 @@ class Point implements Comparable<Point> {
     // gerechnet werden
     // ----------------------------------------------------------
     //  Ich hoffe ich irre mich gerade nicht total, aber ich glaube das macht keinen Sinn.
-    //  m ist doch die Anzahl der Fächer der HashMap. Die "mod m" Operation wird intern von HashMap durchgeführt,
+    //  m ist doch die Anzahl der Fächer der HashMap (standardmäßig 16). Die "mod m" Operation wird intern von HashMap durchgeführt,
     //  was man im Quellcode HashMap.java sehen kann: (Auschnitt aus Hashmaps Einfüge-Methode)
     //      ...
     //      if ((tab = table) == null || (n = tab.length) == 0)
@@ -32,7 +32,7 @@ class Point implements Comparable<Point> {
     //
     // n ist also die aktuelle interne kapazität (anzahl der fächer) der HashMap, die wir laut VL m nennen.
     // der index der verwendet wird ist n-1 ge-and-et mit dem hashwert.
-    // da HashMap so konstruiert ist, dass die interne Länge immer eine zweierpotzenz (0...010...0) ist,
+    // da HashMap so konstruiert ist, dass die interne Länge immer eine zweierpotenz (0...010...0) ist,
     // ist n-1 also (0...01...1) in binärdarstellung, also ist ein AND mit dem HashCode ein Abschneiden
     // der signifikantesten bits des Hashes bis inkl. dem bit welches stellenwert n hat.
     // --> entspricht modulo n
@@ -80,20 +80,25 @@ public class MapTest {
         LinkedList<Integer> outputBuffer = new LinkedList<Integer>();
         while (scan.hasNext()) {
             Point p = new Point(scan.nextInt(), scan.nextInt());
-            if (!P.containsKey(p)) {
-                P.put(p,i++);
+            if (!P.containsKey(p)) { //Erwartete Laufzeit = n/m = Belegungsfaktor
+                P.put(p,i++); //konstante Laufzeit
                 out.println(""+p.x+" "+p.y);
                 outputBuffer.add(i);
             } else {
-                outputBuffer.add(P.get(p));
+                outputBuffer.add(P.get(p)); //erwartete Laufzeit = n/m = Belegungsfaktor
             }
-        }
+        } // Laufzeit <= 2*Sigma(k/m)  für k=1 bis n + 1
+          // Laufzeit <= m*(n^2+n) element von O(n^2)
+          // (Wir nehmen an m=p und es findet kein vergrößern der HashMap statt).
+
         System.out.println("|P| = "+i);
         out.println("TOTAL: "+i+" UNIQUE POINTS");
         out.println("EDGES AS INDEX PAIRS:");
         for (Iterator vi = outputBuffer.iterator(); vi.hasNext();) {
             out.println("("+vi.next()+","+vi.next()+")");
-        }
+        } // Laufzeit O(n)
+
+        // Bei Benutzung von TreeMap statt Hashmap ergibt sich für die containsKey() Methode eine Laufzeit von O(log n), die gesamte Laufzeit wäre dann in O(n log n).
     } catch (Exception e) {
         e.printStackTrace();
     }

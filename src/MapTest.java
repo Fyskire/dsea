@@ -20,8 +20,9 @@ class Point implements Comparable<Point> {
     // Für ein m != p muss da dieser Stelle noch modulo m
     // gerechnet werden
     // ----------------------------------------------------------
-    //  Ich hoffe ich irre mich gerade nicht total, aber ich glaube das macht keinen Sinn.
-    //  m ist doch die Anzahl der Fächer der HashMap (standardmäßig 16). Die "mod m" Operation wird intern von HashMap durchgeführt,
+    //  ????????
+    //  In der VL hatten wir doch m immer als die Anzahl der Fächer der HashMap (standardmäßig 16). 
+    //  Die "mod m" Operation wird intern von HashMap durchgeführt,
     //  was man im Quellcode HashMap.java sehen kann: (Auschnitt aus Hashmaps Einfüge-Methode)
     //      ...
     //      if ((tab = table) == null || (n = tab.length) == 0)
@@ -42,6 +43,7 @@ class Point implements Comparable<Point> {
     // Die Situation m=p könnte man also nur erzwingen, indem man für p eine zweierpotenz wählte
     // (was aber für unsere Arten von Hashfunktionen nicht geht, weil p prim sein soll),
     // und die HashMap mit einer initialCapacity (=m) von p erstellt.
+    // 
     //
     //
     //

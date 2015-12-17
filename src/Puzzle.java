@@ -83,11 +83,9 @@ public class Puzzle {
             if (current == "012345678")
                 return current;
             for (Integer i: MOVES.get(current.indexOf('0'))) {
-                char c = i.toString().charAt(0);
                 char[] tmp = current.toCharArray();
-                int swp = current.indexOf('0');
-                tmp[current.indexOf(c)]='0';
-                tmp[swp]=c;
+                tmp[i]='0';
+                tmp[current.indexOf('0')]=current.charAt(i);
                 next = new String(tmp);
                 if (!explored.contains(next)) {
                     q.push(next);

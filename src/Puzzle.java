@@ -72,10 +72,23 @@ public class Puzzle {
     }
 
 
-    public void solve() {
+    public String solve() {
         Set<String> explored = new HashSet<String>();
         MyQueue<String> q = new MyQueue<String>(362880); // = 9!
-        
+        q.push(grid);
+        explored.add(grid);
+        String current, next;
+        while (q.size()>0) {
+            current = q.pop();
+            if (current == "012345678")
+                return current;
+            for (Integer i: MOVES.get(current.indexOf('0'))) {
+                next = current.replace('0',i.toString().charAt(0));
+                q.push(next);
+                explored.add(next);
+            }
+        }
+        return null;
     }
 
     public String toString() {
@@ -83,11 +96,9 @@ public class Puzzle {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-        Puzzle p = new Puzzle("C:\\Users\\Yorrick\\workspace\\DSEA\\src\\puzzle.txt");
-        //p.setDefault();
+        Puzzle p = new Puzzle(args[0]);
         System.out.println("Inhalt der Matrix als String: " + p);
+        System.out.println(p.solve());
     }
 
 }

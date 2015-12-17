@@ -2,12 +2,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Puzzle {
 
-    private int [][] arr;
-    private int groeszeX=3;
-    private int groeszeY=3;
+    private String grid;
     private static final HashMap<Integer,ArrayList<Integer>> MOVES;
     static {
         MOVES = new HashMap<Integer,ArrayList<Integer>>(9);
@@ -47,62 +47,47 @@ public class Puzzle {
      */
     public Puzzle(String filepath){
         try (Scanner s = new Scanner(new File(filepath))) {
-
-            String save = "";
-            arr = new int[groeszeY][groeszeX];
-
-            //Baut immer erst Zeile auf, bevor die Spalte wechselt
-            while(s.hasNext()){
-                for(int i = 0; i<groeszeY; i++){
-                    for(int j=0; j<groeszeX; j++){
-                        arr[i][j] = Integer.parseInt(s.next());
-                    }
-                }
-            }
-        } catch(Exception e) {
+            StringBuilder sb = new StringBuilder();
+            while (s.hasNext())
+                sb.append(s.next());
+            grid = sb.toString();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Setzt die Belegung wie auf dem Blatt
-     */
-    public void setDefault(){
-        this.groeszeX=3;
-        this.groeszeY=3;
-        arr= new int[groeszeY][groeszeX];
-        arr[0][0]=3;
-        arr[0][1]=2;
-        arr[0][2]=7;
-        arr[1][0]=1;
-        arr[1][1]=4;
-        arr[1][2]=5;
-        arr[2][0]=0;
-        arr[2][1]=6;
-        arr[2][2]=8;
+    public Puzzle(int[][] arr) {
+        grid = encode(arr);
     }
 
     /*
      * 2a) gibt Matrix als String zurück
      */
-    public String print(){
-        String erg = "";
-        for(int i = 0; i<groeszeY; i++){
-            for(int j=0; j<groeszeX; j++){
-                erg += arr[i][j];
-            }
-        }
-        return erg;
+    public String encode(int[][] arr){
+        StringBuilder sb = new StringBuilder(9);
+        for(int i = 0; i<3; i++)
+            for(int j=0; j<3; j++)
+                sb.append(arr[i][j]);
+        return sb.toString();
     }
 
 
+    public void solve() {
+        Set<String> explored = new HashSet<String>();
+        MyQueue<String> q = new MyQueue<String>(362880); // = 9!
+        
+    }
+
+    public String toString() {
+        return grid;
+    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
         Puzzle p = new Puzzle("C:\\Users\\Yorrick\\workspace\\DSEA\\src\\puzzle.txt");
         //p.setDefault();
-        System.out.println("Inhalt der Matrix als String: " + p.print());
+        System.out.println("Inhalt der Matrix als String: " + p);
     }
 
 }

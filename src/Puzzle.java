@@ -46,8 +46,7 @@ public class Puzzle {
      * @param filepath
      */
     public Puzzle(String filepath){
-        try{
-            Scanner s = new Scanner(new File(filepath));
+        try (Scanner s = new Scanner(new File(filepath))) {
 
             String save = "";
             arr = new int[groeszeY][groeszeX];

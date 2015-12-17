@@ -112,6 +112,7 @@ public class Puzzle {
 
     public static void main(String[] args) {
         //Puzzle p = new Puzzle("C:\\Users\\Yorrick\\workspace\\DSEA\\src\\puzzle.txt");
+        //Puzzle p = new Puzzle(new int[][]{{1,0,2},{3,4,5},{6,7,8}});
         Puzzle p = new Puzzle(args[0]);
         System.out.println("Puzzle "+p+" ist "+(!p.solve()?"nicht ":"")+"lösbar.");
     }

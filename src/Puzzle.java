@@ -10,7 +10,7 @@ public class Puzzle {
     private String grid;
     private static final HashMap<Integer,ArrayList<Integer>> MOVES;
     static {//erzeugt HashMap
-        MOVES = new HashMap<Integer,ArrayList<Integer>>(9);
+        MOVES = new HashMap<Integer,ArrayList<Integer>>(4);
         for (int i = 0;i<9;i++) MOVES.put(i,new ArrayList<Integer>());
         MOVES.get(0).add(1);
         MOVES.get(0).add(3);
@@ -72,40 +72,38 @@ public class Puzzle {
     }
 
     /**
-     * 2d) Für den auf dem Blatt gegebenen Kodierung 
-     * 327145068 ist keine Folge von Zügen möglich, 
-     * die in die geordnete Matrix überführen.
-     * Für zB.: 324175068 existiert eine Folge von 
-     * Zügen, um in die geordnete Matrix zu überführen.
-     * 
+     * 2d) Für die auf dem Blatt gegebene Kodierung
+     * 327145068 existiert keine Lösung.
+     * Für zB.: 324175068 existiert eine Lösung.
+     *
      * @return "null" für nicht lösbar oder sortiert falls lösbar
      */
-    public String solve() {
+    public boolean solve() {
         Set<String> explored = new HashSet<String>();
         MyQueue<String> q = new MyQueue<String>(362880); // = 9!
         q.push(grid);
         explored.add(grid);
         String current, next;
-        
+
         while (q.size()>0) {
             current = q.pop();
-            
+
             if (current.equals("012345678"))
-                return current;
-            
+                return true;
+
             for (Integer i: MOVES.get(current.indexOf('0'))) {
                 char[] tmp = current.toCharArray();
                 tmp[i]='0';
                 tmp[current.indexOf('0')]=current.charAt(i);
                 next = new String(tmp);
-                
+
                 if (!explored.contains(next)) {
                     q.push(next);
                     explored.add(next);
                 }
             }
         }
-        return null;
+        return false;
     }
 
     public String toString() {
@@ -113,9 +111,9 @@ public class Puzzle {
     }
 
     public static void main(String[] args) {
-        Puzzle p = new Puzzle("C:\\Users\\Yorrick\\workspace\\DSEA\\src\\puzzle.txt");
-        System.out.println("Inhalt der Matrix als String: " + p);
-        System.out.println(p.solve());
+        //Puzzle p = new Puzzle("C:\\Users\\Yorrick\\workspace\\DSEA\\src\\puzzle.txt");
+        Puzzle p = new Puzzle(args[0]);
+        System.out.println("Puzzle "+p+" ist "+(!p.solve()?"nicht ":"")+"lösbar.");
     }
 
 }
